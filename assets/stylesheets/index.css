@@ -16,9 +16,31 @@ body > h1 {
   text-align: center;
 }
 
+.new-book {
+  display: block;
+  cursor: pointer;
+  width: 200px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  margin: 0 auto 25px;
+  color: white;
+  background-color: rgb(69, 243, 25);
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.new-book:hover {
+  box-shadow: 0 4px 10px -2px black;
+}
+
+.new-book:focus {
+  box-shadow: 0 4px 16px -2px black;
+}
+
 #book-list .item {
-  width: 280px;
-  height: 100px;
+  width: 320px;
+  height: 130px;
   border-radius: 10px;
   box-shadow: 0 0 16px -6px black;
   margin: 15px;
@@ -46,10 +68,45 @@ body > h1 {
   object-position: top;
 }
 
+.item .book-info {
+  position: relative;
+}
+
 .item .book-info p {
   margin-bottom: 5px;
 }
 
 .item .book-info .book-title {
   font-weight: bold;
+}
+
+.book-info .circle {
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  margin-right: 4px;
+  display: inline-block;
+}
+
+.status {
+  position: absolute;
+  top: -20px;
+  left: 0;
+  font-size: 11px;
+}
+
+.green {
+  color: rgb(16, 230, 16);
+}
+
+.red {
+  color: rgb(241, 21, 5);
+}
+
+.circle-green {
+  background-color: rgb(16, 230, 16);
+}
+
+.circle-red {
+  background-color: rgb(241, 21, 5);
 }
