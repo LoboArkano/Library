@@ -1,0 +1,16 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+#book-list {
+  display: flex;
+  width: 50%;
+  align-items: center;
+}
+
+#book-list .item {
+  width: 30%;
+  padding: 0.5%;
+}
