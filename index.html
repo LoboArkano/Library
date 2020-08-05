@@ -7,8 +7,44 @@
   <link rel="stylesheet" href="assets/stylesheets/index.css">
 </head>
 <body>
-  <h1 class="text-center">Book Library</h1>
-  <button class="new-book">NEW BOOK</button>
+  <div class="modal d-flex justify-center align-center">
+    <form>
+      <h3 class="text-center pb-1">Add A New Book</h3>
+
+      <div class="input-container">
+        <label for="book-title">Title:</label>
+        <input type="text" name="title" id="book-title" />
+      </div>
+
+      <div class="input-container">
+        <label for="book-author">Author name:</label>
+        <input type="text" name="author" id="book-author" />
+      </div>
+
+      <div class="input-container">
+        <label for="book-pages">Number of pages:</label>
+        <input type="number" name="pages" id="book-pages" />
+      </div>
+
+      <div class="input-container">
+        <label for="book-cover">Cover URL:</label>
+        <input type="number" name="cover" id="book-cover" />
+      </div>
+
+      <div class="radio-container">
+        <input type="radio" name="status" />
+        <label for="book-status">Already Read</label>
+        <input type="radio" name="status" />
+        <label for="book-status">Not read yet</label>
+      </div>
+
+      <button>Add Book</button>
+    </form>
+  </div>
+  <header>
+    <h1 class="text-center">Book Library</h1>
+    <button class="new-book">new book</button>
+  </header>
   <div id="book-list" class="d-flex justify-center">
   </div>
   <script src="javascript/book.js"></script>
