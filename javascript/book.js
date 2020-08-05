@@ -38,19 +38,29 @@ function render () {
         <img class="book-image" src="${book.image_url}">
         <div class="book-info">
           <p class="d-flex align-center status ${book.read ? 'green' : 'red'}">
-            <span class="circle ${book.read ? 'circle-green' : 'circle-red'}">
+            <span class="circle ${book.read ? 'green-bg' : 'red-bg'}">
             </span>
             ${book.read ? 'Already read' : 'Not read yet'}
           </p>
           <p class="book-title">${book.title}</p>
-          <p class="book-author">author: ${book.author}</p>
-          <p class="book-pages">pages: ${book.pages}</p>
+          <p class="book-author">Author: ${book.author}</p>
+          <p class="book-pages">Pages: ${book.pages}</p>
         </div>
       </div>
     `;
 
     bookList.innerHTML += card;
   });
+}
+
+function render_form () {
+  const form = document.getElementById('book-form');
+  form.classList.remove('d-none');
+}
+
+function hide_form () {
+  const form = document.getElementById('book-form');
+  form.classList.add('d-none');
 }
 
 render();

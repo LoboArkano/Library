@@ -7,8 +7,10 @@
   <link rel="stylesheet" href="assets/stylesheets/index.css">
 </head>
 <body>
-  <div class="modal d-flex justify-center align-center">
-    <form>
+  <div id="book-form" class="modal d-none d-flex justify-center align-center">
+    <form class="book-form">
+      <span class="button-close" onclick="hide_form()">
+      </span>
       <h3 class="text-center pb-1">Add A New Book</h3>
 
       <div class="input-container">
@@ -28,7 +30,7 @@
 
       <div class="input-container">
         <label for="book-cover">Cover URL:</label>
-        <input type="number" name="cover" id="book-cover" />
+        <input type="text" name="cover" id="book-cover" />
       </div>
 
       <div class="radio-container">
@@ -38,12 +40,13 @@
         <label for="book-status">Not read yet</label>
       </div>
 
-      <button>Add Book</button>
+      <button class="button green-bg">Add Book</button>
+      <span class="button red-bg" onclick="hide_form()">Cancel</span>
     </form>
   </div>
   <header>
     <h1 class="text-center">Book Library</h1>
-    <button class="new-book">new book</button>
+    <button class="new-book" onclick="render_form()">new book</button>
   </header>
   <div id="book-list" class="d-flex justify-center">
   </div>

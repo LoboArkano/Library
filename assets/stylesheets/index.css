@@ -22,6 +22,9 @@ header > h1 {
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.301);
   z-index: 100;
+  animation-name: scroll-form;
+  animation-duration: 1s;
+  animation-delay: 0s;
 }
 
 .modal form {
@@ -75,22 +78,56 @@ header > h1 {
   align-items: center;
 }
 
-.modal form button {
+.modal form .button {
   border: none;
   border-radius: 5px;
-  background-color: rgb(69, 243, 25);
   color: white;
   padding: 10px 20px;
   font-weight: bold;
   outline: none;
   cursor: pointer;
+  font-size: 13px;
 }
 
-.modal form button:hover {
+.book-form {
+  position: relative;
+}
+
+.button-close {
+  position: absolute;
+  right: 20px;
+  top: 8px;
+  width: 25px;
+  height: 25px;
+  opacity: 0.3;
+}
+
+.button-close:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.button-close::before,
+.button-close::after {
+  position: absolute;
+  left: 15px;
+  content: ' ';
+  height: 25px;
+  width: 2px;
+  background-color: #333;
+}
+.button-close::before {
+  transform: rotate(45deg);
+}
+.button-close::after {
+  transform: rotate(-45deg);
+}
+
+.modal form .button:hover {
   box-shadow: 0 4px 16px -6px black;
 }
 
-.modal form button:focus {
+.modal form .button:focus {
   box-shadow: 0 4px 12px -10px black;
 }
 
@@ -138,6 +175,10 @@ header > h1 {
   display: flex;
 }
 
+.d-none {
+  display: none;
+}
+
 .align-center {
   align-items: center;
 }
@@ -166,6 +207,13 @@ header > h1 {
 
 .item .book-info .book-title {
   font-weight: bold;
+  font-size: 16px;
+}
+
+.item .book-info .book-author,
+.item .book-info .book-pages {
+  color: rgb(141, 141, 141);
+  font-size: 13px;
 }
 
 .book-info .circle {
@@ -191,10 +239,15 @@ header > h1 {
   color: rgb(241, 21, 5);
 }
 
-.circle-green {
+.green-bg {
   background-color: rgb(16, 230, 16);
 }
 
-.circle-red {
+.red-bg {
   background-color: rgb(241, 21, 5);
+}
+
+@keyframes scroll-form {
+  from { top: -100vh; }
+  to { top: 0; }
 }
