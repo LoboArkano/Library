@@ -239,6 +239,21 @@ header > h1 {
   cursor: pointer;
 }
 
+.edit-status {
+  position: absolute;
+  right: -110px;
+  color: #1273EB;
+  display: flex;
+  align-items: center;
+}
+
+.edit-status img {
+  width: 12px;
+  height: 12px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
 .status {
   position: absolute;
   top: -20px;

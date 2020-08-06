@@ -1,28 +1,28 @@
 let myBooksList = [
-  {
-    id: 1,
-    image_url: 'https://a.wattpad.com/cover/22127925-288-k860552.jpg',
-    title: 'Harry Potter Chapter 1',
-    author: 'Jose Roberto',
-    pages: 535,
-    read: false,
-  },
-  {
-    id: 2,
-    image_url: 'https://images-na.ssl-images-amazon.com/images/I/81s5gr8znaL.jpg',
-    title: 'Alchimist',
-    author: 'Zakariae El Mejdki',
-    pages: 230,
-    read: true,
-  },
-  {
-    id: 3,
-    image_url: 'https://miro.medium.com/max/480/1*E6aoQIUVWcJbDbXulkLpkg.jpeg',
-    title: 'Rich Dad Poor Dad',
-    author: 'Zakariae Roberto',
-    pages: 354,
-    read: false,
-  },
+  new Book(
+    2,
+    'Alchimist',
+    'Zakariae El Mejdki',
+    230,
+    'https://images-na.ssl-images-amazon.com/images/I/81s5gr8znaL.jpg',
+    true
+  ),
+  new Book(
+    1,
+    'Harry Potter Chapter 1',
+    'Jose Roberto',
+    535,
+    'https://a.wattpad.com/cover/22127925-288-k860552.jpg',
+    false
+  ),
+  new Book(
+    3,
+    'Rich Dad Poor Dad',
+    'Zakariae Roberto',
+    354,
+    'https://miro.medium.com/max/480/1*E6aoQIUVWcJbDbXulkLpkg.jpeg',
+    false
+  )
 ];
 
 let lastID = 3;
@@ -35,7 +35,11 @@ function Book(id, title, author, pages, image_url = defaultCover, read) {
   this.image_url = image_url;
   this.author = author;
   this.pages = pages;
-  this.read = read;
+  this.status = read;
+}
+
+Book.prototype.toggleStatus = function() {
+  this.status = !this.status;
 }
 
 function addBookToList (book) {
@@ -50,10 +54,14 @@ function render () {
       <div class="item align-center d-flex">
         <img class="book-image" src="${book.image_url}">
         <div class="book-info">
-          <p class="d-flex align-center status ${book.read ? 'green' : 'red'}">
-            <span class="circle ${book.read ? 'green-bg' : 'red-bg'}">
+          <p class="d-flex align-center status ${book.status ? 'green' : 'red'}">
+            <span class="circle ${book.status ? 'green-bg' : 'red-bg'}">
             </span>
-            ${book.read ? 'Already read' : 'Not read yet'}
+            ${book.status ? 'Already read' : 'Not read yet'}
+
+            <span class="edit-status">
+              <image src="assets/images/edit.png" onclick="toggleStatus(${book.id})"> status
+            </span>
           </p>
           <p class="book-title">${book.title}</p>
           <p class="book-author">Author: ${book.author}</p>
@@ -67,6 +75,12 @@ function render () {
   });
 }
 
+function toggleStatus(book_id) {
+  const book = myBooksList.find(book => book.id === book_id);
+  book.toggleStatus();
+  render();
+}
+
 function render_form () {
   const form = document.getElementById('book-form');
   form.classList.remove('d-none');
@@ -75,20 +89,6 @@ function render_form () {
 function hide_form () {
   const form = document.getElementById('book-form');
   form.classList.add('d-none');
-}
-
-function getRadioVal(form, name) {
-  var val;
-  console.log(form);
-  var radios = form.elements[name];
-
-  for (var i=0, len=radios.length; i<len; i++) {
-      if ( radios[i].checked ) {
-          val = radios[i].value;
-          break;
-      }
-  }
-  return val;
 }
 
 function deleteBook(key) {
