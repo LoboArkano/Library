@@ -22,7 +22,9 @@ let myBooksList = [
   },
 ];
 
-function Book(title, author, pages, image_url, read) {
+const defaultCover = 'https://www.brantlibrary.ca/en/resourcesGeneral/default-river.png';
+
+function Book(title, author, pages, image_url = defaultCover, read) {
   this.title = title;
   this.image_url = image_url;
   this.author = author;
@@ -91,16 +93,25 @@ const url = document.getElementById('book-cover');
 
 submit_btn.addEventListener('click', (e) => {
   e.preventDefault();
-
+  let imageUrl;
+  if(url.value === "") {
+    imageUrl = undefined;
+  } else {
+    imageUrl = url.value;
+  }
   const book = new Book(
     title.value,
     author.value,
     pages.value,
-    url.value,
+    imageUrl,
     document.querySelector('input[name=status]:checked').value === "true"
   );
 
   myBooksList.push(book);
+  title.value = "";
+  author.value = "";
+  pages.value = "";
+  url.value = "";
   hide_form();
   render();
 });
