@@ -116,9 +116,11 @@ header > h1 {
   width: 2px;
   background-color: #333;
 }
+
 .button-close::before {
   transform: rotate(45deg);
 }
+
 .button-close::after {
   transform: rotate(-45deg);
 }
@@ -229,6 +231,7 @@ header > h1 {
   top: -20px;
   left: 0;
   font-size: 11px;
+  width: 100px;
 }
 
 .green {

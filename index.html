@@ -8,7 +8,7 @@
 </head>
 <body>
   <div id="book-form" class="modal d-none d-flex justify-center align-center">
-    <form class="book-form">
+    <form class="book-form" id="book-form">
       <span class="button-close" onclick="hide_form()">
       </span>
       <h3 class="text-center pb-1">Add A New Book</h3>
@@ -34,13 +34,13 @@
       </div>
 
       <div class="radio-container">
-        <input type="radio" name="status" />
+        <input type="radio" name="status" value=true checked />
         <label for="book-status">Already Read</label>
-        <input type="radio" name="status" />
+        <input type="radio" name="status" value=false />
         <label for="book-status">Not read yet</label>
       </div>
 
-      <button class="button green-bg">Add Book</button>
+      <button id="form-btn" class="button green-bg">Add Book</button>
       <span class="button red-bg" onclick="hide_form()">Cancel</span>
     </form>
   </div>

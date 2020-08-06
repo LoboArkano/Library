@@ -22,8 +22,12 @@ let myBooksList = [
   },
 ];
 
-function Book() {
-
+function Book(title, author, pages, image_url, read) {
+  this.title = title;
+  this.image_url = image_url;
+  this.author = author;
+  this.pages = pages;
+  this.read = read;
 }
 
 function addBookToList (book) {
@@ -32,6 +36,7 @@ function addBookToList (book) {
 
 function render () {
   const bookList = document.getElementById('book-list');
+  bookList.innerHTML = '';
   myBooksList.forEach((book) => {
     const card = `
       <div class="item align-center d-flex">
@@ -62,5 +67,42 @@ function hide_form () {
   const form = document.getElementById('book-form');
   form.classList.add('d-none');
 }
+
+function getRadioVal(form, name) {
+  var val;
+  console.log(form);
+  var radios = form.elements[name];
+
+  for (var i=0, len=radios.length; i<len; i++) {
+      if ( radios[i].checked ) {
+          val = radios[i].value;
+          break;
+      }
+  }
+  return val;
+}
+
+const submit_btn = document.getElementById('form-btn');
+const form = document.getElementById('book-form');
+const title = document.getElementById('book-title');
+const author = document.getElementById('book-author');
+const pages = document.getElementById('book-pages');
+const url = document.getElementById('book-cover');
+
+submit_btn.addEventListener('click', (e) => {
+  e.preventDefault();
+
+  const book = new Book(
+    title.value,
+    author.value,
+    pages.value,
+    url.value,
+    document.querySelector('input[name=status]:checked').value === "true"
+  );
+
+  myBooksList.push(book);
+  hide_form();
+  render();
+});
 
 render();
