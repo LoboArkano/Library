@@ -1,36 +1,16 @@
-let myBooksList = [
-  new Book(
-    2,
-    'Alchimist',
-    'Zakariae El Mejdki',
-    230,
-    'https://images-na.ssl-images-amazon.com/images/I/81s5gr8znaL.jpg',
-    true
-  ),
-  new Book(
-    1,
-    'Harry Potter Chapter 1',
-    'Jose Roberto',
-    535,
-    'https://a.wattpad.com/cover/22127925-288-k860552.jpg',
-    false
-  ),
-  new Book(
-    3,
-    'Rich Dad Poor Dad',
-    'Zakariae Roberto',
-    354,
-    'https://miro.medium.com/max/480/1*E6aoQIUVWcJbDbXulkLpkg.jpeg',
-    false
-  )
-];
+const db = firebase.firestore();
 
-let lastID = 3;
+let myBooksList = [];
 
+const submit_btn = document.getElementById('form-btn');
+const form = document.getElementById('book-form');
+const title = document.getElementById('book-title');
+const author = document.getElementById('book-author');
+const pages = document.getElementById('book-pages');
+const url = document.getElementById('book-cover');
 const defaultCover = 'https://www.brantlibrary.ca/en/resourcesGeneral/default-river.png';
 
-function Book(id, title, author, pages, image_url = defaultCover, read) {
-  this.id = id,
+function Book(title, author, pages, image_url = defaultCover, read) {
   this.title = title;
   this.image_url = image_url;
   this.author = author;
@@ -82,12 +62,10 @@ function toggleStatus(book_id) {
 }
 
 function render_form () {
-  const form = document.getElementById('book-form');
   form.classList.remove('d-none');
 }
 
 function hide_form () {
-  const form = document.getElementById('book-form');
   form.classList.add('d-none');
 }
 
@@ -99,24 +77,16 @@ function deleteBook(key) {
   render();
 }
 
-const submit_btn = document.getElementById('form-btn');
-const form = document.getElementById('book-form');
-const title = document.getElementById('book-title');
-const author = document.getElementById('book-author');
-const pages = document.getElementById('book-pages');
-const url = document.getElementById('book-cover');
-
-submit_btn.addEventListener('click', (e) => {
+submit_btn.addEventListener('click', async (e) => {
   e.preventDefault();
+
   let imageUrl;
   if(url.value === "") {
     imageUrl = undefined;
   } else {
     imageUrl = url.value;
   }
-  lastID += 1;
   const book = new Book(
-    lastID,
     title.value,
     author.value,
     pages.value,
@@ -124,11 +94,19 @@ submit_btn.addEventListener('click', (e) => {
     document.querySelector('input[name=status]:checked').value === "true"
   );
 
-  myBooksList.push(book);
-  title.value = "";
-  author.value = "";
-  pages.value = "";
-  url.value = "";
+
+  await db.collection('books').doc().set({
+    title: book.title,
+    author: book.author,
+    pages: book.pages,
+    image_url: book.image_url,
+    status: book.status,
+  });
+
+  title.value = '';
+  author.value = '';
+  pages.value = '';
+  url.value = '';
   hide_form();
   render();
 });
