@@ -1,5 +1,6 @@
 let myBooksList = [
   {
+    id: 1,
     image_url: 'https://a.wattpad.com/cover/22127925-288-k860552.jpg',
     title: 'Harry Potter Chapter 1',
     author: 'Jose Roberto',
@@ -7,6 +8,7 @@ let myBooksList = [
     read: false,
   },
   {
+    id: 2,
     image_url: 'https://images-na.ssl-images-amazon.com/images/I/81s5gr8znaL.jpg',
     title: 'Alchimist',
     author: 'Zakariae El Mejdki',
@@ -14,6 +16,7 @@ let myBooksList = [
     read: true,
   },
   {
+    id: 3,
     image_url: 'https://miro.medium.com/max/480/1*E6aoQIUVWcJbDbXulkLpkg.jpeg',
     title: 'Rich Dad Poor Dad',
     author: 'Zakariae Roberto',
@@ -22,9 +25,12 @@ let myBooksList = [
   },
 ];
 
+let lastID = 3;
+
 const defaultCover = 'https://www.brantlibrary.ca/en/resourcesGeneral/default-river.png';
 
-function Book(title, author, pages, image_url = defaultCover, read) {
+function Book(id, title, author, pages, image_url = defaultCover, read) {
+  this.id = id,
   this.title = title;
   this.image_url = image_url;
   this.author = author;
@@ -53,6 +59,7 @@ function render () {
           <p class="book-author">Author: ${book.author}</p>
           <p class="book-pages">Pages: ${book.pages}</p>
         </div>
+        <image class="delete-btn" src="assets/images/trash.png" onclick="deleteBook(${book.id})">
       </div>
     `;
 
@@ -84,6 +91,14 @@ function getRadioVal(form, name) {
   return val;
 }
 
+function deleteBook(key) {
+  const books = myBooksList.filter((book) => {
+    return book.id !== key;
+  });
+  myBooksList = books;
+  render();
+}
+
 const submit_btn = document.getElementById('form-btn');
 const form = document.getElementById('book-form');
 const title = document.getElementById('book-title');
@@ -99,7 +114,9 @@ submit_btn.addEventListener('click', (e) => {
   } else {
     imageUrl = url.value;
   }
+  lastID += 1;
   const book = new Book(
+    lastID,
     title.value,
     author.value,
     pages.value,

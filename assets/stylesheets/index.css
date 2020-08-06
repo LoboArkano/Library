@@ -189,6 +189,10 @@ header > h1 {
   justify-content: center;
 }
 
+.item {
+  position: relative;
+}
+
 .item .book-image {
   width: 25%;
   height: 100%;
@@ -226,6 +230,15 @@ header > h1 {
   display: inline-block;
 }
 
+.delete-btn {
+  position: absolute;
+  right: 10px;
+  bottom: 15px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
 .status {
   position: absolute;
   top: -20px;
@@ -251,6 +264,13 @@ header > h1 {
 }
 
 @keyframes scroll-form {
-  from { top: -100vh; }
-  to { top: 0; }
+  from {
+    top: -100vh;
+    opacity: 0;
+  }
+
+  to {
+    top: 0;
+    opacity: 1;
+  }
 }
