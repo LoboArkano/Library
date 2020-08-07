@@ -26,29 +26,32 @@ function addBookToList (book) {
   myBooksList.push(book);
 }
 
-function render () {
+async function render() {
   const bookList = document.getElementById('book-list');
-  bookList.innerHTML = '';
-  myBooksList.forEach((book) => {
-    const card = `
-      <div class="item align-center d-flex">
-        <img class="book-image" src="${book.image_url}">
-        <div class="book-info">
-          <p class="d-flex align-center status ${book.status ? 'green' : 'red'}">
-            <span class="circle ${book.status ? 'green-bg' : 'red-bg'}">
-            </span>
-            ${book.status ? 'Already read' : 'Not read yet'}
+  const snapShot = await db.collection('books').get();
+  const books = snapShot.docs.map(doc => doc.data());
 
-            <span class="edit-status">
-              <image src="assets/images/edit.png" onclick="toggleStatus(${book.id})"> status
-            </span>
-          </p>
-          <p class="book-title">${book.title}</p>
-          <p class="book-author">Author: ${book.author}</p>
-          <p class="book-pages">Pages: ${book.pages}</p>
-        </div>
-        <image class="delete-btn" src="assets/images/trash.png" onclick="deleteBook(${book.id})">
+  bookList.innerHTML = '';
+  books.forEach((book) => {
+    const card = `
+    <div class="item align-center d-flex">
+      <img class="book-image" src="${book.image_url}">
+      <div class="book-info">
+        <p class="d-flex align-center status ${book.status ? 'green' : 'red'}">
+          <span class="circle ${book.status ? 'green-bg' : 'red-bg'}">
+          </span>
+          ${book.status ? 'Already read' : 'Not read yet'}
+    
+          <span class="edit-status">
+            <image src="assets/images/edit.png" onclick="toggleStatus(${book.id})"> status
+          </span>
+        </p>
+        <p class="book-title">${book.title}</p>
+        <p class="book-author">Author: ${book.author}</p>
+        <p class="book-pages">Pages: ${book.pages}</p>
       </div>
+      <image class="delete-btn" src="assets/images/trash.png" onclick="deleteBook(${book.id})">
+    </div>
     `;
 
     bookList.innerHTML += card;
