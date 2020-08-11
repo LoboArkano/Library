@@ -1,7 +1,6 @@
 const db = firebase.firestore();
 
-let myBooksList = [];
-
+const bookList = document.getElementById('book-list');
 const submit_btn = document.getElementById('form-btn');
 const form = document.getElementById('book-form');
 const title = document.getElementById('book-title');
@@ -10,16 +9,20 @@ const pages = document.getElementById('book-pages');
 const url = document.getElementById('book-cover');
 const defaultCover = 'https://www.brantlibrary.ca/en/resourcesGeneral/default-river.png';
 
-function Book(title, author, pages, image_url = defaultCover, read) {
+function Book(title, author, pages, image_url = defaultCover, status) {
   this.title = title;
   this.image_url = image_url;
   this.author = author;
   this.pages = pages;
-  this.status = read;
+  this.status = status;
 }
 
 Book.prototype.toggleStatus = function() {
   this.status = !this.status;
+}
+
+function toggleStatus(book) {
+  book.toggleStatus();
 }
 
 function addBookToList (book) {
@@ -27,12 +30,13 @@ function addBookToList (book) {
 }
 
 async function render() {
-  const bookList = document.getElementById('book-list');
   const snapShot = await db.collection('books').get();
-  const books = snapShot.docs.map(doc => doc.data());
+  const books = snapShot.docs.map(doc => doc);
 
   bookList.innerHTML = '';
-  books.forEach((book) => {
+  books.forEach((doc) => {
+    const book = doc.data();
+    book.id = doc.id;
     const card = `
     <div class="item align-center d-flex">
       <img class="book-image" src="${book.image_url}">
@@ -43,25 +47,25 @@ async function render() {
           ${book.status ? 'Already read' : 'Not read yet'}
     
           <span class="edit-status">
-            <image src="assets/images/edit.png" onclick="toggleStatus(${book.id})"> status
+            <image class="status-btn" src="assets/images/edit.png" data-id="${book.id}"> status
           </span>
         </p>
         <p class="book-title">${book.title}</p>
         <p class="book-author">Author: ${book.author}</p>
         <p class="book-pages">Pages: ${book.pages}</p>
       </div>
-      <image class="delete-btn" src="assets/images/trash.png" onclick="deleteBook(${book.id})">
+      <image class="delete-btn" src="assets/images/trash.png" data-id="${book.id}">
     </div>
     `;
 
     bookList.innerHTML += card;
   });
-}
 
-function toggleStatus(book_id) {
-  const book = myBooksList.find(book => book.id === book_id);
-  book.toggleStatus();
-  render();
+  const deleteButtons = bookList.querySelectorAll('.delete-btn');
+  deleteButtons.forEach((btn) => btn.addEventListener('click', async (e) => {
+    await db.collection('books').doc(e.target.dataset.id).delete();
+    render();
+  }));
 }
 
 function render_form () {
@@ -70,14 +74,6 @@ function render_form () {
 
 function hide_form () {
   form.classList.add('d-none');
-}
-
-function deleteBook(key) {
-  const books = myBooksList.filter((book) => {
-    return book.id !== key;
-  });
-  myBooksList = books;
-  render();
 }
 
 submit_btn.addEventListener('click', async (e) => {
