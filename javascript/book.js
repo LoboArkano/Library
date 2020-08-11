@@ -1,7 +1,9 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
 const db = firebase.firestore();
 
 const bookList = document.getElementById('book-list');
-const submit_btn = document.getElementById('form-btn');
+const submitBtn = document.getElementById('form-btn');
 const form = document.getElementById('book-form');
 const title = document.getElementById('book-title');
 const author = document.getElementById('book-author');
@@ -9,23 +11,24 @@ const pages = document.getElementById('book-pages');
 const url = document.getElementById('book-cover');
 const defaultCover = 'https://www.brantlibrary.ca/en/resourcesGeneral/default-river.png';
 
-function Book(title, author, pages, image_url = defaultCover, status) {
+function Book(title, author, pages, imageURL = defaultCover, status) {
   this.title = title;
-  this.image_url = image_url;
+  this.imageURL = imageURL;
   this.author = author;
   this.pages = pages;
   this.status = status;
 }
 
-Book.prototype.toggleStatus = function() {
+// eslint-disable-next-line func-names
+Book.prototype.toggleStatus = function () {
   this.status = !this.status;
-}
+};
 
 function toggleStatus(book) {
   book.toggleStatus();
 }
 
-function addBookToList (book) {
+function addBookToList(book) {
   myBooksList.push(book);
 }
 
@@ -39,7 +42,7 @@ async function render() {
     book.id = doc.id;
     const card = `
     <div class="item align-center d-flex pos-rel">
-      <img class="book-image" src="${book.image_url}">
+      <img class="book-image" src="${book.imageURL}">
       <div class="book-info pos-rel">
         <p class="d-flex align-center status pos-abs ${book.status ? 'green' : 'red'}">
           <span class="circle ${book.status ? 'green-bg' : 'red-bg'}">
@@ -79,19 +82,19 @@ async function render() {
   }));
 }
 
-function render_form () {
+function showForm() {
   form.classList.remove('d-none');
 }
 
-function hide_form () {
+function hideForm() {
   form.classList.add('d-none');
 }
 
-submit_btn.addEventListener('click', async (e) => {
+submitBtn.addEventListener('click', async (e) => {
   e.preventDefault();
 
   let imageUrl;
-  if(url.value === "") {
+  if (url.value === '') {
     imageUrl = undefined;
   } else {
     imageUrl = url.value;
@@ -101,7 +104,7 @@ submit_btn.addEventListener('click', async (e) => {
     author.value,
     pages.value,
     imageUrl,
-    document.querySelector('input[name=status]:checked').value === "true"
+    document.querySelector('input[name=status]:checked').value === 'true',
   );
 
 
@@ -109,7 +112,7 @@ submit_btn.addEventListener('click', async (e) => {
     title: book.title,
     author: book.author,
     pages: book.pages,
-    image_url: book.image_url,
+    imageURL: book.imageURL,
     status: book.status,
   });
 
@@ -117,7 +120,7 @@ submit_btn.addEventListener('click', async (e) => {
   author.value = '';
   pages.value = '';
   url.value = '';
-  hide_form();
+  hideForm();
   render();
 });
 

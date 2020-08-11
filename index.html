@@ -9,7 +9,7 @@
 <body>
   <div id="book-form" class="modal d-none d-flex pos-abs justify-center align-center">
     <form class="book-form pos-rel" id="book-form">
-      <span class="button-close pos-abs" onclick="hide_form()">
+      <span class="button-close pos-abs" onclick="hideForm()">
       </span>
       <h3 class="text-center pb-1">Add A New Book</h3>
 
@@ -41,12 +41,12 @@
       </div>
 
       <button id="form-btn" class="button pointer green-bg">Add Book</button>
-      <span class="button pointer red-bg" onclick="hide_form()">Cancel</span>
+      <span class="button pointer red-bg" onclick="hideForm()">Cancel</span>
     </form>
   </div>
   <header>
     <h1 class="text-center">Book Library</h1>
-    <button class="new-book pointer" onclick="render_form()">new book</button>
+    <button class="new-book pointer" onclick="showForm()">new book</button>
   </header>
   <div id="book-list" class="d-flex justify-center">
   </div>
