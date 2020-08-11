@@ -19,8 +19,7 @@ function Book(title, author, pages, imageURL = defaultCover, status) {
   this.status = status;
 }
 
-// eslint-disable-next-line func-names
-Book.prototype.toggleStatus = function () {
+Book.prototype.toggleStatus = function toggle() {
   this.status = !this.status;
 };
 
@@ -103,7 +102,26 @@ function hideForm() {
 }
 
 function validateForm() {
+  let message = '';
+  const pagesInt = parseInt(pages.value, 10);
 
+  if (title.value.length === 0) {
+    message += 'Write the title of the book. ';
+  }
+  if (author.value.length === 0) {
+    message += 'Write the author of the book. ';
+  }
+  if (pagesInt < 1 || Number.isNaN(pagesInt)) {
+    message += 'Write the number of pages.';
+  }
+
+  if (message.length === 0) {
+    return true;
+  }
+
+  // eslint-disable-next-line no-alert
+  alert(message);
+  return false;
 }
 
 submitBtn.addEventListener('click', async (e) => {
@@ -115,29 +133,31 @@ submitBtn.addEventListener('click', async (e) => {
   } else {
     imageUrl = url.value;
   }
-  const book = new Book(
-    title.value,
-    author.value,
-    pages.value,
-    imageUrl,
-    document.querySelector('input[name=status]:checked').value === 'true',
-  );
 
+  if (validateForm()) {
+    const book = new Book(
+      title.value,
+      author.value,
+      pages.value,
+      imageUrl,
+      document.querySelector('input[name=status]:checked').value === 'true',
+    );
 
-  await db.collection('books').doc().set({
-    title: book.title,
-    author: book.author,
-    pages: book.pages,
-    imageURL: book.imageURL,
-    status: book.status,
-  });
+    await db.collection('books').doc().set({
+      title: book.title,
+      author: book.author,
+      pages: book.pages,
+      imageURL: book.imageURL,
+      status: book.status,
+    });
 
-  title.value = '';
-  author.value = '';
-  pages.value = '';
-  url.value = '';
-  hideForm();
-  render();
+    title.value = '';
+    author.value = '';
+    pages.value = '';
+    url.value = '';
+    hideForm();
+    render();
+  }
 });
 
 render();
