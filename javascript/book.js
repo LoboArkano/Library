@@ -32,6 +32,17 @@ function addBookToList(book) {
   myBooksList.push(book);
 }
 
+function truncateTitle(title, maxLength) {
+  const oriLength = title.length;
+  let truncatedTitle = title.substring(0, Math.min(maxLength, oriLength));
+
+  if (truncatedTitle.length < oriLength) {
+    truncatedTitle += '...';
+  }
+
+  return truncatedTitle;
+}
+
 async function render() {
   const snapShot = await db.collection('books').get();
   const books = snapShot.docs.map(doc => doc);
@@ -40,6 +51,7 @@ async function render() {
   books.forEach((doc) => {
     const book = doc.data();
     book.id = doc.id;
+    book.title = truncateTitle(book.title, 20);
     const card = `
     <div class="item align-center d-flex pos-rel">
       <img class="book-image" src="${book.imageURL}">
@@ -88,6 +100,10 @@ function showForm() {
 
 function hideForm() {
   form.classList.add('d-none');
+}
+
+function validateForm() {
+
 }
 
 submitBtn.addEventListener('click', async (e) => {
