@@ -16,8 +16,19 @@ header > h1 {
   padding-bottom: 20px;
 }
 
-.modal {
+.pos-rel {
+  position: relative;
+}
+
+.pos-abs {
   position: absolute;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.modal {
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.301);
@@ -85,16 +96,10 @@ header > h1 {
   padding: 10px 20px;
   font-weight: bold;
   outline: none;
-  cursor: pointer;
   font-size: 13px;
 }
 
-.book-form {
-  position: relative;
-}
-
 .button-close {
-  position: absolute;
   right: 20px;
   top: 8px;
   width: 25px;
@@ -143,7 +148,6 @@ header > h1 {
 
 .new-book {
   display: block;
-  cursor: pointer;
   width: 150px;
   padding: 10px 15px;
   border: none;
@@ -189,10 +193,6 @@ header > h1 {
   justify-content: center;
 }
 
-.item {
-  position: relative;
-}
-
 .item .book-image {
   width: 25%;
   height: 100%;
@@ -201,10 +201,6 @@ header > h1 {
   margin-right: 10px;
   object-fit: cover;
   object-position: top;
-}
-
-.item .book-info {
-  position: relative;
 }
 
 .item .book-info p {
@@ -231,31 +227,24 @@ header > h1 {
 }
 
 .delete-btn {
-  position: absolute;
   right: 10px;
   bottom: 15px;
   width: 20px;
   height: 20px;
-  cursor: pointer;
 }
 
 .edit-status {
-  position: absolute;
   right: -110px;
-  color: #1273EB;
-  display: flex;
-  align-items: center;
+  color: #1273eb;
 }
 
 .edit-status img {
   width: 12px;
   height: 12px;
   margin-right: 5px;
-  cursor: pointer;
 }
 
 .status {
-  position: absolute;
   top: -20px;
   left: 0;
   font-size: 11px;

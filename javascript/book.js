@@ -38,23 +38,23 @@ async function render() {
     const book = doc.data();
     book.id = doc.id;
     const card = `
-    <div class="item align-center d-flex">
+    <div class="item align-center d-flex pos-rel">
       <img class="book-image" src="${book.image_url}">
-      <div class="book-info">
-        <p class="d-flex align-center status ${book.status ? 'green' : 'red'}">
+      <div class="book-info pos-rel">
+        <p class="d-flex align-center status pos-abs ${book.status ? 'green' : 'red'}">
           <span class="circle ${book.status ? 'green-bg' : 'red-bg'}">
           </span>
           ${book.status ? 'Already read' : 'Not read yet'}
     
-          <span class="edit-status">
-            <image class="status-btn" src="assets/images/edit.png" data-id="${book.id}"> status
+          <span class="edit-status d-flex pos-abs align-center">
+            <image class="status-btn pointer" src="assets/images/edit.png" data-id="${book.id}"> status
           </span>
         </p>
         <p class="book-title">${book.title}</p>
         <p class="book-author">Author: ${book.author}</p>
         <p class="book-pages">Pages: ${book.pages}</p>
       </div>
-      <image class="delete-btn" src="assets/images/trash.png" data-id="${book.id}">
+      <image class="delete-btn pos-abs pointer" src="assets/images/trash.png" data-id="${book.id}">
     </div>
     `;
 
