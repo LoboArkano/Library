@@ -61,6 +61,17 @@ async function render() {
     bookList.innerHTML += card;
   });
 
+  const statusButtons = bookList.querySelectorAll('.status-btn');
+  statusButtons.forEach((btn) => btn.addEventListener('click', async (e) => {
+    const doc = await db.collection('books').doc(e.target.dataset.id).get();
+    const book = doc.data();
+    book.id = doc.id;
+    book.status = !book.status;
+
+    await db.collection('books').doc(book.id).update(book);
+    render();
+  }));
+
   const deleteButtons = bookList.querySelectorAll('.delete-btn');
   deleteButtons.forEach((btn) => btn.addEventListener('click', async (e) => {
     await db.collection('books').doc(e.target.dataset.id).delete();
