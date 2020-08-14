@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Library</title>
+  <link rel="stylesheet" href="assets/stylesheets/index.css">
+</head>
+<body>
+  <div id="book-form" class="modal d-none d-flex pos-abs justify-center align-center">
+    <form class="book-form pos-rel" id="book-form">
+      <span class="button-close pos-abs" onclick="hideForm()">
+      </span>
+      <h3 class="text-center pb-1">Add A New Book</h3>
+
+      <div class="input-container">
+        <label for="book-title">Title:</label>
+        <input type="text" name="title" id="book-title" />
+      </div>
+
+      <div class="input-container">
+        <label for="book-author">Author name:</label>
+        <input type="text" name="author" id="book-author" />
+      </div>
+
+      <div class="input-container">
+        <label for="book-pages">Number of pages:</label>
+        <input type="number" name="pages" id="book-pages" />
+      </div>
+
+      <div class="input-container">
+        <label for="book-cover">Cover URL:</label>
+        <input type="text" name="cover" id="book-cover" />
+      </div>
+
+      <div class="radio-container">
+        <input type="radio" name="status" value=true checked />
+        <label for="book-status">Already Read</label>
+        <input type="radio" name="status" value=false />
+        <label for="book-status">Not read yet</label>
+      </div>
+
+      <button id="form-btn" class="button pointer green-bg">Add Book</button>
+      <span class="button pointer red-bg" onclick="hideForm()">Cancel</span>
+    </form>
+  </div>
+  <header>
+    <h1 class="text-center">Book Library</h1>
+    <button class="new-book pointer" onclick="showForm()">new book</button>
+  </header>
+  <div id="book-list" class="d-flex justify-center">
+  </div>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-app.js"></script>
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+      https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-firestore.js"></script>
+  <script src="javascript/config.js"></script>
+  <script src="javascript/book.js"></script>
+</body>
+</html>

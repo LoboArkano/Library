@@ -1,0 +1,280 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  position: relative;
+}
+
+header > h1 {
+  padding: 30px;
+}
+
+.pb-1 {
+  padding-bottom: 20px;
+}
+
+.pos-rel {
+  position: relative;
+}
+
+.pos-abs {
+  position: absolute;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.modal {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.301);
+  z-index: 100;
+  animation-name: scroll-form;
+  animation-duration: 1s;
+  animation-delay: 0s;
+}
+
+.modal form {
+  background-color: white;
+  padding: 20px;
+  border-radius: 20px;
+  width: 300px;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 20px;
+}
+
+.input-container input {
+  padding: 5px 7px;
+  border: 1px solid rgba(128, 128, 128, 0.26);
+  border-radius: 4px;
+}
+
+.radio-container input {
+  cursor: pointer;
+}
+
+.input-container input:hover {
+  border: 1px solid rgba(128, 128, 128, 0.521);
+}
+
+.input-container input:focus {
+  border: 1px solid rgba(128, 128, 128, 0.603);
+}
+
+.input-container label {
+  padding-bottom: 3px;
+}
+
+.input-container label,
+.radio-container label {
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.radio-container label {
+  padding: 5px;
+}
+
+.radio-container {
+  padding-bottom: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.modal form .button {
+  border: none;
+  border-radius: 5px;
+  color: white;
+  padding: 10px 20px;
+  font-weight: bold;
+  outline: none;
+  font-size: 13px;
+}
+
+.button-close {
+  right: 20px;
+  top: 8px;
+  width: 25px;
+  height: 25px;
+  opacity: 0.3;
+}
+
+.button-close:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.button-close::before,
+.button-close::after {
+  position: absolute;
+  left: 15px;
+  content: ' ';
+  height: 25px;
+  width: 2px;
+  background-color: #333;
+}
+
+.button-close::before {
+  transform: rotate(45deg);
+}
+
+.button-close::after {
+  transform: rotate(-45deg);
+}
+
+.modal form .button:hover {
+  box-shadow: 0 4px 16px -6px black;
+}
+
+.modal form .button:focus {
+  box-shadow: 0 4px 12px -10px black;
+}
+
+#book-list {
+  flex-wrap: wrap;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.new-book {
+  display: block;
+  width: 150px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  margin: 0 auto 25px;
+  color: white;
+  background-color: rgb(69, 243, 25);
+  font-size: 15px;
+  text-transform: capitalize;
+  font-weight: bold;
+  outline: none;
+}
+
+.new-book:hover {
+  box-shadow: 0 4px 16px -6px black;
+}
+
+.new-book:focus {
+  box-shadow: 0 4px 12px -10px black;
+}
+
+#book-list .item {
+  width: 320px;
+  height: 130px;
+  border-radius: 10px;
+  box-shadow: 0 0 16px -6px black;
+  margin: 15px;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.d-none {
+  display: none;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.item .book-image {
+  width: 25%;
+  height: 100%;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  margin-right: 10px;
+  object-fit: cover;
+  object-position: top;
+}
+
+.item .book-info p {
+  margin-bottom: 5px;
+}
+
+.item .book-info .book-title {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.item .book-info .book-author,
+.item .book-info .book-pages {
+  color: rgb(141, 141, 141);
+  font-size: 13px;
+}
+
+.book-info .circle {
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  margin-right: 4px;
+  display: inline-block;
+}
+
+.delete-btn {
+  right: 10px;
+  bottom: 15px;
+  width: 20px;
+  height: 20px;
+}
+
+.edit-status {
+  right: -110px;
+  color: #1273eb;
+}
+
+.edit-status img {
+  width: 12px;
+  height: 12px;
+  margin-right: 5px;
+}
+
+.status {
+  top: -20px;
+  left: 0;
+  font-size: 11px;
+  width: 100px;
+}
+
+.green {
+  color: rgb(16, 230, 16);
+}
+
+.red {
+  color: rgb(241, 21, 5);
+}
+
+.green-bg {
+  background-color: rgb(16, 230, 16);
+}
+
+.red-bg {
+  background-color: rgb(241, 21, 5);
+}
+
+@keyframes scroll-form {
+  from {
+    top: -100vh;
+    opacity: 0;
+  }
+
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
